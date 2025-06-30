@@ -1,165 +1,122 @@
-🎭 Automated Face & Hand Segmentation using SAM2 API
-This project implements a fully automated pipeline to detect faces and hands in images and segment them using the SAM2 (Segment Anything v2) API by Meta. It combines the power of YOLOv8 for detection and SAM2 for fine-grained segmentation.
-🧠 Features
+# 🎭 Face & Hand Segmentation using SAM2 API
 
-🧍 Automated Detection: Detect faces and hands from any image without manual annotations
-🎯 SAM2 Integration: Use SAM2 API (via Replicate) for precise segmentation masks
-🎨 Visual Overlays: Overlay segmented masks with different colors for clear visualization
-📐 Multiple Outputs: Contour visualization, binary masks, and combined results
-🖼️ Interactive UI: Gradio interface for easy image upload and real-time processing
-💡 Fully Automated: No manual bounding boxes or user prompts required
+This project implements a fully automated pipeline that detects faces and hands in any input image and segments them using Meta's **Segment Anything Model v2 (SAM2)** via Replicate API.
 
-🎥 Demo
-Project Demo Video: Watch Demo
-Sample Results
-Original ImageDetection ResultsSegmentation MasksShow ImageShow ImageShow Image
-🛠️ Installation
-Prerequisites
+It uses:
+- 🔍 **YOLOv8** models for detection
+- 🎯 **SAM2 API** for precise segmentation
+- 🎨 Clean visualizations with overlays, contours, and binary masks
+- 🌐 An interactive Gradio UI for real-time testing
 
-Python 3.8+
-pip package manager
-Replicate API account and token
+---
 
-Setup Steps
-1. Clone the repository
-bashgit clone https://github.com/RMdot02/face-hand-segmentation-sam2.git
+## 🚀 Demo
+
+Upload your image via the Gradio interface and get:
+- Segmented faces (💛 Yellow)
+- Segmented hands (💜 Magenta)
+- Binary mask
+- Contour visualization
+
+![Demo video](output/Project%20Demo/demo.mp4)
+
+---
+
+## 📁 Folder Structure
+├── app.py # Gradio UI interface
+├── main.py # Core detection + segmentation logic
+├── yolov8n-face.pt # YOLOv8 face model
+├── hand_yolov8n.pt # YOLOv8 hand model
+├── .env # Contains Replicate API key (not pushed to GitHub)
+├── requirements.txt # Python dependencies
+├── Readme.md # Project documentation
+├── input_samples/ # Sample input images
+├── output/ # Sample outputs (masks, overlays)
+└── .gitignore # Files/directories excluded from Git
+
+## 🔧 Setup Instructions
+
+### 1. Clone the repository
+git clone https://github.com/RMdot02/face-hand-segmentation-sam2.git
 cd face-hand-segmentation-sam2
-2. Create virtual environment (recommended)
-bashpython -m venv venv
-On Windows:
-bashvenv\Scripts\activate
-On macOS/Linux:
-bashsource venv/bin/activate
-3. Install dependencies
-bashpip install -r requirements.txt
-4. Set up API credentials
-Create a .env file in the root directory:
-envREPLICATE_API_TOKEN=your_replicate_api_token_here
-Get your Replicate API token from: https://replicate.com/account/api-tokens
-▶️ Usage
-Method 1: Gradio Web Interface (Recommended)
-bashpython app.py
-Then open your browser and go to the local URL displayed (usually http://127.0.0.1:7860)
-Method 2: Command Line Processing
-bashpython main.py
-This will process all images in the input_samples/ directory and save results to output/.
-Method 3: Custom Processing
-pythonfrom main import process_image
 
-# Process a single image
-result_path = process_image("path/to/your/image.jpg", "output/")
-print(f"Results saved to: {result_path}")
-🏗️ How It Works
-Pipeline Overview
-1. Face & Hand Detection
+### 2. Create and activate a virtual environment
+python -m venv venv310
+venv310\Scripts\activate   # For Windows
+# Or: source venv310/bin/activate  # For Mac/Linux
 
-Uses YOLOv8 model trained specifically for face and hand detection
-Detects bounding boxes with confidence scores
-Filters detections based on confidence threshold (default: 0.5)
+### 3. Install requirements
+pip install -r requirements.txt
 
-2. Prompt Generation
+### 4. Add your Replicate API key
+REPLICATE_API_TOKEN=your_replicate_api_key_here
 
-Converts bounding boxes to point prompts for SAM2
-Uses center points of detected regions as positive prompts
 
-3. SAM2 Segmentation
+## How It Works
 
-Sends image and prompts to Replicate SAM2 API
-Receives high-quality segmentation masks
-Processes masks for visualization
+### Detection:
+Uses YOLOv8 models (yolov8n-face.pt, hand_yolov8n.pt) to detect face and hand bounding boxes.
 
-4. Visualization
+Segmentation (SAM2):
+For each bounding box, the center point and box are sent to the SAM2 model via Replicate API.
 
-Overlays masks with distinct colors (faces: red, hands: blue)
-Generates contour visualizations
-Saves multiple output formats
+### Post-Processing:
 
-File Structure
-face-hand-segmentation-sam2/
-├── app.py                  # Gradio web interface
-├── main.py                 # Main processing script
-├── hand_yolov8n.pt        # YOLOv8 model for hand detection
-├── yolov8n-face.pt        # YOLOv8 model for face detection
-├── requirements.txt        # Python dependencies
-├── .env                   # API credentials (create this)
-├── input_samples/         # Input images
-├── output/                # Generated results
-│   ├── sample1/
-│   ├── sample2/
-│   └── Project Demo/
-│       └── demo.mp4      # Demo video
-└── README.md
-📋 Dependencies
-Key libraries used:
+Filters large/invalid masks
 
-ultralytics - YOLOv8 for object detection
-replicate - SAM2 API integration
-gradio - Web interface
-opencv-python - Image processing
-pillow - Image manipulation
-numpy - Numerical operations
+Applies morphological operations
 
-See requirements.txt for complete list.
-🎯 Technical Details
-Detection Models
+Validates mask overlap with original box
 
-Face Detection: YOLOv8n trained on face datasets
-Hand Detection: YOLOv8n trained on hand datasets
-Confidence Threshold: 0.5 (adjustable)
+### Visualization:
 
-SAM2 Integration
+Segmented result with color overlays
 
-API Provider: Replicate
-Model: meta/sam-2:f3956b3b4b1d8c0bc63b62a2dafc1ad31815a4fb3f0e5a45b5aaf9b8d4d9e99e
-Prompt Type: Point prompts (bounding box centers)
+Contour map
 
-Output Formats
+Binary mask image
 
-Detection visualization with bounding boxes
-Segmentation masks overlaid on original image
-Binary masks for each detected object
-Contour visualizations
+### 💡 Features
+✅ End-to-end automation
 
-🚨 Limitations & Edge Cases
-Current Limitations
+🧠 Robust face & hand detection
 
-API Dependency: Requires stable internet connection for Replicate API
-Processing Time: SAM2 API calls can take 5-15 seconds per image
-Detection Accuracy: Performance depends on image quality and lighting
-Overlapping Objects: May struggle with heavily overlapping hands/faces
+🔍 Point + box prompts to SAM2 for precision
 
-Known Edge Cases
+🎨 Clean visual output (overlays, contours, binary masks)
 
-Very small faces/hands (< 50px) may not be detected
-Extreme poses or angles can reduce detection accuracy
-Images with multiple people may have varying segmentation quality
-API rate limits may affect batch processing
+🌐 Gradio-based interactive UI
 
-Potential Improvements
+## 📸 Sample Inputs & Outputs
+Input Image 	                                                 Segmentation	                                     
+![img](input_samples/sample4.webp)                               ![img](output/sample%203/segmented_result.png)      
 
-Add local SAM2 model support to reduce API dependency
-Implement batch processing optimization
-Add confidence score filtering for segmentation results
-Support for video processing
+Contour                                                          Binary Mask
+![img](output/sample%203/contour%20visualization.png)            ![img](output/sample%203/Mask.png)      
+     !
 
-🤝 Contributing
+## ⚠️ Limitations
+SAM2 API can timeout or fail for highly complex or low-resolution images.
 
-Fork the repository
-Create a feature branch (git checkout -b feature/new-feature)
-Commit your changes (git commit -am 'Add new feature')
-Push to the branch (git push origin feature/new-feature)
-Create a Pull Request
+Segmenting small or partially occluded faces/hands may be inaccurate.
 
-📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-🙏 Acknowledgments
+Replicate API requires an internet connection and active API key.
 
-Meta AI for the SAM2 model
-Ultralytics for YOLOv8 framework
-Replicate for API hosting
-Gradio for the web interface framework
 
-📞 Contact
-For questions or support, please open an issue on GitHub or contact the maintainer.
+### 📜 License
+This project is for educational/demo purposes and follows MIT License.
 
-Built with ❤️ for automated computer vision tasks
+### 🙌 Acknowledgements
+Meta AI - Segment Anything v2 (SAM2)
+
+Replicate API
+
+Ultralytics YOLOv8
+
+Gradio
+
+### 📬 Contact
+Author: Rishabh Mahendroo
+Email: rishabhmahendroo2@gmail.com
+LinkedIn: www.linkedin.com/in/rishabhmahendroo2
+
