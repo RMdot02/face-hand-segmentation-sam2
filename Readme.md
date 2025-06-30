@@ -24,15 +24,25 @@ Upload your image via the Gradio interface and get:
 
 ## 📁 Folder Structure
 ├── app.py # Gradio UI interface
+
 ├── main.py # Core detection + segmentation logic
+
 ├── yolov8n-face.pt # YOLOv8 face model
+
 ├── hand_yolov8n.pt # YOLOv8 hand model
+
 ├── .env # Contains Replicate API key (not pushed to GitHub)
+
 ├── requirements.txt # Python dependencies
+
 ├── Readme.md # Project documentation
+
 ├── input_samples/ # Sample input images
+
 ├── output/ # Sample outputs (masks, overlays)
+
 └── .gitignore # Files/directories excluded from Git
+
 
 ## 🔧 Setup Instructions
 
@@ -43,7 +53,7 @@ cd face-hand-segmentation-sam2
 ### 2. Create and activate a virtual environment
 python -m venv venv310
 venv310\Scripts\activate   # For Windows
-# Or: source venv310/bin/activate  # For Mac/Linux
+Or: source venv310/bin/activate  # For Mac/Linux
 
 ### 3. Install requirements
 pip install -r requirements.txt
@@ -89,10 +99,10 @@ Binary mask image
 
 ## 📸 Sample Inputs & Outputs
 Input Image 	                                                 Segmentation	                                     
-![img](input_samples/sample4.webp)                               ![img](output/sample%203/segmented_result.png)      
+![img](input_samples/sample2.jpg)                               ![img](output/sample1/Segmented_result.png)      
 
-Contour                                                          Binary Mask
-![img](output/sample%203/contour%20visualization.png)            ![img](output/sample%203/Mask.png)      
+Contour                                                          
+![img](output/sample1/contours.png)                 
      !
 
 ## ⚠️ Limitations
@@ -117,6 +127,8 @@ Gradio
 
 ### 📬 Contact
 Author: Rishabh Mahendroo
+
 Email: rishabhmahendroo2@gmail.com
+
 LinkedIn: www.linkedin.com/in/rishabhmahendroo2
 
