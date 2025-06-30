@@ -1,0 +1,8 @@
+ultralytics==8.0.199
+opencv-python
+numpy
+Pillow
+requests
+python-dotenv
+replicate
+gradio

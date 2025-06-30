@@ -1,0 +1,21 @@
+# Ignore virtual environments
+venv/
+venv310/
+
+# Ignore Python bytecode and cache
+_pycache_/
+*.py[cod]
+*$py.class
+
+# Ignore environment config
+.env
+
+# Ignore Gradio cache
+.gradio/
+
+# Ignore OS/system files
+.DS_Store
+Thumbs.db
+
+# Optional: VSCode settings (if you don't want to track them)
+.vscode/
