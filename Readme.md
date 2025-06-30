@@ -31,7 +31,7 @@ Upload your image via the Gradio interface and get:
 
 ├── hand_yolov8n.pt # YOLOv8 hand model
 
-├── .env # Contains Replicate API key (not pushed to GitHub)
+├── .env # Contains Replicate API key
 
 ├── requirements.txt # Python dependencies
 
@@ -98,10 +98,13 @@ Binary mask image
 🌐 Gradio-based interactive UI
 
 ## 📸 Sample Inputs & Outputs
-Input Image 	                                                 Segmentation	                                     
-![img](input_samples/sample2.jpg)                               ![img](output/sample1/Segmented_result.png)      
+Input Image 	                                                                                     
+![img](input_samples/sample2.jpg)       
 
-Contour                                                          
+Segmentation
+![img](output/sample1/Segmented_result.png)
+
+Contours                                                          
 ![img](output/sample1/contours.png)                 
      !
 
