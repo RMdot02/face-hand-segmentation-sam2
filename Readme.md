@@ -48,11 +48,14 @@ Upload your image via the Gradio interface and get:
 
 ### 1. Clone the repository
 git clone https://github.com/RMdot02/face-hand-segmentation-sam2.git
+
 cd face-hand-segmentation-sam2
 
 ### 2. Create and activate a virtual environment
 python -m venv venv310
+
 venv310\Scripts\activate   # For Windows
+
 Or: source venv310/bin/activate  # For Mac/Linux
 
 ### 3. Install requirements
@@ -118,10 +121,10 @@ Segmenting small or partially occluded faces/hands may be inaccurate.
 Replicate API requires an internet connection and active API key.
 
 
-### 📜 License
+## 📜 License
 This project is for educational/demo purposes and follows MIT License.
 
-### 🙌 Acknowledgements
+## 🙌 Acknowledgements
 Meta AI - Segment Anything v2 (SAM2)
 
 Replicate API
@@ -130,7 +133,7 @@ Ultralytics YOLOv8
 
 Gradio
 
-### 📬 Contact
+## 📬 Contact
 Author: Rishabh Mahendroo
 
 Email: rishabhmahendroo2@gmail.com
