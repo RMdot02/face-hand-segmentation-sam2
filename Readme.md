@@ -98,15 +98,17 @@ Binary mask image
 🌐 Gradio-based interactive UI
 
 ## 📸 Sample Inputs & Outputs
+
 Input Image 	                                                                                     
 ![img](input_samples/sample2.jpg)       
 
-Segmentation
-![img](output/sample1/Segmented_result.png)
 
 Contours                                                          
-![img](output/sample1/contours.png)                 
-     !
+![img](output/sample1/contours.png)   
+
+
+Segmentation
+![img](output/sample1/Segmented_result.png)
 
 ## ⚠️ Limitations
 SAM2 API can timeout or fail for highly complex or low-resolution images.
