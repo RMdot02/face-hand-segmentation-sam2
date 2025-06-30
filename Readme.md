@@ -10,8 +10,9 @@ This project implements a fully automated pipeline to detect faces and hands in 
 💡 Fully Automated: No manual bounding boxes or user prompts required
 
 🎥 Demo
-output\Project Demo\demo.mp4
-
+Project Demo Video: Watch Demo
+Sample Results
+Original ImageDetection ResultsSegmentation MasksShow ImageShow ImageShow Image
 🛠️ Installation
 Prerequisites
 
@@ -20,28 +21,21 @@ pip package manager
 Replicate API account and token
 
 Setup Steps
-
-Clone the repository
+1. Clone the repository
 bashgit clone https://github.com/RMdot02/face-hand-segmentation-sam2.git
 cd face-hand-segmentation-sam2
-
-Create virtual environment (recommended)
+2. Create virtual environment (recommended)
 bashpython -m venv venv
-
-# On Windows:
-venv\Scripts\activate
-
-# On macOS/Linux:
-source venv/bin/activate
-
-Install dependencies
+On Windows:
+bashvenv\Scripts\activate
+On macOS/Linux:
+bashsource venv/bin/activate
+3. Install dependencies
 bashpip install -r requirements.txt
-
-Set up API credentials
+4. Set up API credentials
 Create a .env file in the root directory:
 envREPLICATE_API_TOKEN=your_replicate_api_token_here
 Get your Replicate API token from: https://replicate.com/account/api-tokens
-
 ▶️ Usage
 Method 1: Gradio Web Interface (Recommended)
 bashpython app.py
@@ -57,34 +51,28 @@ result_path = process_image("path/to/your/image.jpg", "output/")
 print(f"Results saved to: {result_path}")
 🏗️ How It Works
 Pipeline Overview
-
-Face & Hand Detection
+1. Face & Hand Detection
 
 Uses YOLOv8 model trained specifically for face and hand detection
 Detects bounding boxes with confidence scores
 Filters detections based on confidence threshold (default: 0.5)
 
-
-Prompt Generation
+2. Prompt Generation
 
 Converts bounding boxes to point prompts for SAM2
 Uses center points of detected regions as positive prompts
 
-
-SAM2 Segmentation
+3. SAM2 Segmentation
 
 Sends image and prompts to Replicate SAM2 API
 Receives high-quality segmentation masks
 Processes masks for visualization
 
-
-Visualization
+4. Visualization
 
 Overlays masks with distinct colors (faces: red, hands: blue)
 Generates contour visualizations
 Saves multiple output formats
-
-
 
 File Structure
 face-hand-segmentation-sam2/
@@ -99,6 +87,7 @@ face-hand-segmentation-sam2/
 │   ├── sample1/
 │   ├── sample2/
 │   └── Project Demo/
+│       └── demo.mp4      # Demo video
 └── README.md
 📋 Dependencies
 Key libraries used:
@@ -172,3 +161,5 @@ Gradio for the web interface framework
 
 📞 Contact
 For questions or support, please open an issue on GitHub or contact the maintainer.
+
+Built with ❤️ for automated computer vision tasks
